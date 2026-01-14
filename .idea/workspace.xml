@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f1699a6-b470-42bf-b89d-1a1e70bbc9a2" name="Changes" comment="project settings">
-      <change afterPath="$PROJECT_DIR$/src/.github/pull_request_template.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7f1699a6-b470-42bf-b89d-1a1e70bbc9a2" name="Changes" comment="feat: project settings; create PR template" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +85,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1768363821478</updated>
-      <workItem from="1768363823668" duration="2243000" />
+      <workItem from="1768363823668" duration="2402000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -114,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768367438382</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: project settings; create PR template">
+      <option name="closed" value="true" />
+      <created>1768368306455</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1768368306456</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +128,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="project settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="project settings" />
+    <MESSAGE value="feat: project settings; create PR template" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: project settings; create PR template" />
   </component>
 </project>
