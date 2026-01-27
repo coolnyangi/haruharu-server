@@ -1,6 +1,6 @@
-package com.haruharu.haruharu.global.common.entity;
+package com.haruharu.haruharu.common.entity;
 
-import com.haruharu.haruharu.global.common.response.ApiResponse;
+import com.haruharu.haruharu.common.response.ApiResponse;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
