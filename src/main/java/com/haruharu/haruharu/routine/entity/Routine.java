@@ -52,11 +52,11 @@ public class Routine extends BaseTimeEntity {
         this.endDate = endDate;
     }
 
-    public void setSuccess() {
+    public void markSuccess() {
         this.isSuccess = true;
     }
 
-    public void setFailure() {
+    public void markFailure() {
         this.isSuccess = false;
     }
 }
