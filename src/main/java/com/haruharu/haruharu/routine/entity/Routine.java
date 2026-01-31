@@ -34,10 +34,12 @@ public class Routine extends BaseTimeEntity {
     private RoutineStatus status;
 
     // 생성자
-    public Routine(String title, LocalDate startDate, LocalDate endDate) {
+    public Routine(User user, String title, LocalDate startDate, LocalDate endDate) {
+        this.user = user;
         this.title = title;
         this.startDate = startDate;
-        this.status = RoutineStatus.PENDING;
+        this.endDate = endDate;
+        this.status = RoutineStatus.PENDING; // 루틴이 생성되면 기본적으로 진행 중으로 생성
     }
 
     // 도메인 메서드
