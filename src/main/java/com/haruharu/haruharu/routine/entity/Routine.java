@@ -1,6 +1,7 @@
 package com.haruharu.haruharu.routine.entity;
 
 import com.haruharu.haruharu.common.entity.BaseTimeEntity;
+import com.haruharu.haruharu.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,9 @@ public class Routine extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Todo user 엔티티 완성 후 연결하기
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(length = 50, nullable = false)
     private String title;
