@@ -31,13 +31,13 @@ public class Routine extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status;
+    private RoutineStatus status;
 
     // 생성자
     public Routine(String title, LocalDate startDate, LocalDate endDate) {
         this.title = title;
         this.startDate = startDate;
-        this.status = Status.PENDING;
+        this.status = RoutineStatus.PENDING;
     }
 
     // 도메인 메서드
@@ -55,10 +55,10 @@ public class Routine extends BaseTimeEntity {
 
     public void markSuccess() {
         this.endDate = LocalDate.now();
-        this.status = Status.SUCCESS;
+        this.status = RoutineStatus.SUCCESS;
     }
 
     public void markFailure() {
-        this.status = Status.FAILURE;
+        this.status = RoutineStatus.FAILURE;
     }
 }

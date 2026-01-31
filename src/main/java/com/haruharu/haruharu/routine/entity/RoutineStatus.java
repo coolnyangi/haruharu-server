@@ -1,6 +1,6 @@
 package com.haruharu.haruharu.routine.entity;
 
-public enum Status {
+public enum RoutineStatus {
     SUCCESS,
     FAILURE,
     PENDING
