@@ -1,9 +1,9 @@
 package com.haruharu.haruharu.common.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@EnableAspectJAutoProxy
 @Configuration
+@EnableJpaAuditing
 public class JpaAuditingConfig {
 }
