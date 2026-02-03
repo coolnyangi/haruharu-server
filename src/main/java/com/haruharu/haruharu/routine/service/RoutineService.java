@@ -5,6 +5,7 @@ import com.haruharu.haruharu.common.exception.ErrorCode;
 import com.haruharu.haruharu.routine.entity.Routine;
 import com.haruharu.haruharu.routine.entity.RoutineStatus;
 import com.haruharu.haruharu.routine.repository.RoutineRepository;
+import com.haruharu.haruharu.user.entity.User;
 import com.haruharu.haruharu.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ public class RoutineService {
     // 습관 생성
     @Transactional
     public Routine createRoutine(Long userId, String title, LocalDate startDate, LocalDate endDate, RoutineStatus status) {
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new BusinessException(ErrorCode.VALIDATION_ERROR));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.VALIDATION_ERROR));
         // 1. 새로운 루틴에 들어갈 파라미터를 받는다.
         // 2. 새로운 루틴 객체를 만든다.
         Routine routine = new Routine();
