@@ -60,7 +60,7 @@ public class RoutineService {
 
     // 습관 재시작 (시작일 변경)
     @Transactional
-    public Routine updateRoutine(Long routineId, LocalDate startDate) {
+    public Routine retryRoutine(Long routineId, LocalDate startDate) {
         // 1. 루틴 아이디 가져온다.
         Routine routine = getRoutine(routineId);
 
@@ -85,7 +85,39 @@ public class RoutineService {
     }
 
     // 습관 성공 -> 루틴 로그에서 21일이 기록되면 자동 실행 -> 컬렉션으로 전달
+    // Todo : 컬렉션 도메인과 연결하기
+    public Routine successRoutine(Long routineId) {
+        // 1. 루틴 아이디로 루틴 조회한다.
+        Routine routine = getRoutine(routineId);
 
-    // 습관 실패 -> 루틴 로그에서 실패 기록되면 자동 실행 -> 재시작 또는 삭제
+        // 2. 도메인 메서드를 이용하여 성공 처리한다.
+        routine.markSuccess();
 
+        // 3. 저장한다.
+        return routineRepository.save(routine);
+    }
+
+    // 실패한 습관 삭제
+    public void deleteFailRoutine(Long routineId) {
+        // 1. 루틴 아이디로 루틴 조회한다.
+        Routine routine = getRoutine(routineId);
+
+        // 2. 도메인 메서드를 이용하여 실패 처리한다.
+        routine.markFailure();
+
+        // 3. 삭제한다.
+        deleteRoutine(routineId);
+    }
+
+    // 실패한 습관 재시작
+    public void retryFailRoutine(Long routineId) {
+        // 1. 루틴 아이디로 루틴 조회
+        Routine routine = getRoutine(routineId);
+
+        // 2. 실패 처리
+        routine.markFailure();
+
+        // 3. 재시작 함수 실행 파라미터는 루틴 아이디랑 로컬데이트
+        retryRoutine(routineId, LocalDate.now());
+    }
 }
