@@ -29,7 +29,7 @@ public class RoutineService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.VALIDATION_ERROR));
         // 1. 새로운 루틴에 들어갈 파라미터를 받는다.
         // 2. 새로운 루틴 객체를 만든다.
-        Routine routine = new Routine();
+        Routine routine = new Routine(user, title, startDate, endDate);
 
         // 3. 생선된 루틴을 저장한다.
         return routineRepository.save(routine);
