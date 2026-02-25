@@ -2,7 +2,10 @@ package com.haruharu.haruharu.routine.service;
 
 import com.haruharu.haruharu.common.exception.BusinessException;
 import com.haruharu.haruharu.common.exception.ErrorCode;
+import com.haruharu.haruharu.routine.dto.request.RoutineCreateRequest;
+import com.haruharu.haruharu.routine.dto.request.RoutineUpdateRequest;
 import com.haruharu.haruharu.routine.entity.Routine;
+import com.haruharu.haruharu.routine.entity.RoutineEmoji;
 import com.haruharu.haruharu.routine.entity.RoutineStatus;
 import com.haruharu.haruharu.routine.repository.RoutineRepository;
 import com.haruharu.haruharu.user.entity.User;
@@ -24,12 +27,20 @@ public class RoutineService {
 
     // 습관 생성
     @Transactional
-    public Routine createRoutine(Long userId, String title, LocalDate startDate, LocalDate endDate, RoutineStatus status) {
+    public Routine createRoutine(Long userId, RoutineCreateRequest req) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.VALIDATION_ERROR));
         // 1. 새로운 루틴에 들어갈 파라미터를 받는다.
         // 2. 새로운 루틴 객체를 만든다.
-        Routine routine = new Routine(user, title, startDate, endDate);
+        Routine routine = new Routine(
+                user,
+                req.title(),
+                req.startDate(),
+                null,
+                RoutineStatus.PENDING,
+                req.emoji(),
+                req.color()
+        );
 
         // 3. 생선된 루틴을 저장한다.
         return routineRepository.save(routine);
@@ -71,14 +82,17 @@ public class RoutineService {
         return routineRepository.save(routine);
     }
 
-    // 습관 이름 변경
+    // 습관 수정
     @Transactional
-    public Routine updateTitle(Long routineId, String title) {
+    public Routine updateRoutine(Long routineId, RoutineUpdateRequest req) {
         // 1. 루틴 아이디를 가져온다.
         Routine routine = getRoutine(routineId);
 
-        // 2. 루틴 이름을 도메인 메서드를 사용하여 변경한다.
-        routine.changeTitle(title);
+        // 2. 도메인 메서드를 사용하여 변경한다.
+        if (req.title() != null) routine.changeTitle(req.title());
+        if (req.emoji() != null) routine.changeEmoji(req.emoji());
+        if (req.color() != null) routine.changeColor(req.color());
+        if (req.startDate() != null) routine.changeStartDate(req.startDate());
 
         // 3. 저장한다.
         return routineRepository.save(routine);
