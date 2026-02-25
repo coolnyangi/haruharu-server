@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 
 @Entity
 @Getter
@@ -33,13 +35,21 @@ public class Routine extends BaseTimeEntity {
     @Column(nullable = false)
     private RoutineStatus status;
 
+    @Enumerated(EnumType.STRING)
+    private RoutineEmoji emoji;
+
+    @Enumerated(EnumType.STRING)
+    private RoutineColor color;
+
     // 생성자
-    public Routine(User user, String title, LocalDate startDate, LocalDate endDate) {
+    public Routine(User user, String title, LocalDate startDate, LocalDate endDate, RoutineStatus status, RoutineEmoji emoji, RoutineColor color) {
         this.user = user;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = RoutineStatus.PENDING; // 루틴이 생성되면 기본적으로 진행 중으로 생성
+        this.emoji = emoji;
+        this.color = color;
     }
 
     // 도메인 메서드
@@ -62,5 +72,13 @@ public class Routine extends BaseTimeEntity {
 
     public void markFailure() {
         this.status = RoutineStatus.FAILURE;
+    }
+
+    public void changeEmoji(RoutineEmoji emoji) {
+        this.emoji = emoji;
+    }
+
+    public void changeColor(RoutineColor color) {
+        this.color = color;
     }
 }
