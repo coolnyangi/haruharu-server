@@ -3,11 +3,13 @@ package com.haruharu.haruharu.routine.controller;
 import com.haruharu.haruharu.common.auth.CurrentUserId;
 import com.haruharu.haruharu.common.response.SuccessResponse;
 import com.haruharu.haruharu.routine.dto.request.RoutineCreateRequest;
+import com.haruharu.haruharu.routine.dto.request.RoutineUpdateRequest;
 import com.haruharu.haruharu.routine.dto.response.RoutineCreateResponse;
 import com.haruharu.haruharu.routine.dto.response.RoutineResponse;
 import com.haruharu.haruharu.routine.entity.Routine;
 import com.haruharu.haruharu.routine.entity.RoutineStatus;
 import com.haruharu.haruharu.routine.service.RoutineService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +29,12 @@ public class RoutineController {
     @PostMapping
     public ResponseEntity<SuccessResponse<RoutineCreateResponse>> create(
             @CurrentUserId Long userId,
-            @RequestBody RoutineCreateRequest req
+            @Valid @RequestBody RoutineCreateRequest req
     ) {
-        Routine routine = routineService.createRoutine(
-                userId,
-                req.title(),
-                req.startDate(),
-                null, // endDate 아직 없으면 null
-                RoutineStatus.PENDING
-        );
+        Routine routine = routineService.createRoutine(userId, req);
 
-        RoutineCreateResponse response = new RoutineCreateResponse(routine.getId());
+        RoutineCreateResponse response =
+                new RoutineCreateResponse(routine.getId());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -96,15 +93,26 @@ public class RoutineController {
         return ResponseEntity.ok(SuccessResponse.ok(null));
     }
 
+    // 7. 습관 패치
+    @PatchMapping("/{routineId}")
+    public ResponseEntity<SuccessResponse<RoutineResponse>> patch(
+            @PathVariable Long routineId,
+            @RequestBody RoutineUpdateRequest req
+    ) {
+        Routine updated = routineService.updateRoutine(routineId, req);
+        return ResponseEntity.ok(SuccessResponse.ok(toResponse(updated)));
+    }
+
     // dto 변환
     private RoutineResponse toResponse(Routine routine) {
         return new RoutineResponse(
                 routine.getId(),
                 routine.getTitle(),
-                null,
-                null,
+                routine.getEmoji(),
+                routine.getColor(),
                 routine.getStartDate(),
-                routine.getStatus() == RoutineStatus.PENDING
+                routine.getEndDate(),
+                routine.getStatus()
         );
     }
 }
