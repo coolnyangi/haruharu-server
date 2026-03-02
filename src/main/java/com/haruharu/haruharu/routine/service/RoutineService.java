@@ -39,7 +39,8 @@ public class RoutineService {
                 null,
                 RoutineStatus.PENDING,
                 req.emoji(),
-                req.color()
+                req.color(),
+                req.flower()
         );
 
         // 3. 생선된 루틴을 저장한다.
