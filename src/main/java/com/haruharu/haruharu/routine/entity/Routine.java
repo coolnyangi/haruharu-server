@@ -1,0 +1,99 @@
+package com.haruharu.haruharu.routine.entity;
+
+import com.haruharu.haruharu.common.entity.BaseTimeEntity;
+import com.haruharu.haruharu.user.entity.User;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import java.time.LocalDate;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+
+@Entity
+@Getter
+@NoArgsConstructor
+@Table(name = "routines")
+public class Routine extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(length = 50, nullable = false)
+    private String title;
+
+    @Column(nullable = false)
+    private LocalDate startDate;
+
+    @Column
+    private LocalDate endDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoutineStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private RoutineEmoji emoji;
+
+    @Enumerated(EnumType.STRING)
+    private RoutineColor color;
+
+    @Column
+    private String flower;
+
+    // 생성자
+    public Routine(
+            User user,
+            String title,
+            LocalDate startDate,
+            LocalDate endDate,
+            RoutineStatus status,
+            RoutineEmoji emoji,
+            RoutineColor color,
+            String flower) {
+
+        this.user = user;
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = RoutineStatus.PENDING; // 루틴이 생성되면 기본적으로 진행 중으로 생성
+        this.emoji = emoji;
+        this.color = color;
+        this.flower = flower;
+    }
+
+    // 도메인 메서드
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    public void changeFlower(String flower) {this.flower = flower;}
+
+    public void changeStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void changeEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void markSuccess() {
+        this.endDate = LocalDate.now();
+        this.status = RoutineStatus.SUCCESS;
+    }
+
+    public void markFailure() {
+        this.status = RoutineStatus.FAILURE;
+    }
+
+    public void changeEmoji(RoutineEmoji emoji) {
+        this.emoji = emoji;
+    }
+
+    public void changeColor(RoutineColor color) {
+        this.color = color;
+    }
+}
