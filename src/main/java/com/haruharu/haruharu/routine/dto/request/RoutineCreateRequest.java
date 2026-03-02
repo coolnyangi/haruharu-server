@@ -11,5 +11,6 @@ public record RoutineCreateRequest(
         @NotBlank String title,
         @NotNull RoutineEmoji emoji,
         @NotNull RoutineColor color,
+        @NotNull String flower,
         @NotNull LocalDate startDate
 ) {}

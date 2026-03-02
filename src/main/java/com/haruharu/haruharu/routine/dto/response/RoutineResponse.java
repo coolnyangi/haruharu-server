@@ -11,6 +11,7 @@ public record RoutineResponse(
         String title,
         RoutineEmoji emoji,
         RoutineColor color,
+        String flower,
         LocalDate startDate,
         LocalDate endDate,
         RoutineStatus status
