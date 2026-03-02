@@ -110,6 +110,7 @@ public class RoutineController {
                 routine.getTitle(),
                 routine.getEmoji(),
                 routine.getColor(),
+                routine.getFlower(),
                 routine.getStartDate(),
                 routine.getEndDate(),
                 routine.getStatus()
