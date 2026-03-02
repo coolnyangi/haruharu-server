@@ -41,8 +41,20 @@ public class Routine extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private RoutineColor color;
 
+    @Column
+    private String flower;
+
     // 생성자
-    public Routine(User user, String title, LocalDate startDate, LocalDate endDate, RoutineStatus status, RoutineEmoji emoji, RoutineColor color) {
+    public Routine(
+            User user,
+            String title,
+            LocalDate startDate,
+            LocalDate endDate,
+            RoutineStatus status,
+            RoutineEmoji emoji,
+            RoutineColor color,
+            String flower) {
+
         this.user = user;
         this.title = title;
         this.startDate = startDate;
@@ -50,12 +62,15 @@ public class Routine extends BaseTimeEntity {
         this.status = RoutineStatus.PENDING; // 루틴이 생성되면 기본적으로 진행 중으로 생성
         this.emoji = emoji;
         this.color = color;
+        this.flower = flower;
     }
 
     // 도메인 메서드
     public void changeTitle(String title) {
         this.title = title;
     }
+
+    public void changeFlower(String flower) {this.flower = flower;}
 
     public void changeStartDate(LocalDate startDate) {
         this.startDate = startDate;
