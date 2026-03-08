@@ -80,7 +80,7 @@ public class RoutineService {
         routine.changeStartDate(startDate);
 
         // 3. 저장한다.
-        return routineRepository.save(routine);
+        return routine;
     }
 
     // 습관 수정
@@ -96,7 +96,7 @@ public class RoutineService {
         if (req.startDate() != null) routine.changeStartDate(req.startDate());
 
         // 3. 저장한다.
-        return routineRepository.save(routine);
+        return routine;
     }
 
     // 습관 성공 -> 루틴 로그에서 21일이 기록되면 자동 실행 -> 컬렉션으로 전달
@@ -109,7 +109,7 @@ public class RoutineService {
         routine.markSuccess();
 
         // 3. 저장한다.
-        return routineRepository.save(routine);
+        return routine;
     }
 
     // 실패한 습관 삭제
